@@ -2,7 +2,7 @@
 
 Manual QA tracking for the **Aurion** platform — an AI-powered voice agent for IT support + customer service SaaS.
 
-**~580 test cases** across 26 sections, organized by user journey.
+**~590 test cases** across 26 sections, organized by user journey.
 
 ---
 
@@ -205,7 +205,7 @@ What is being tested and why.
 |---|---------|--------|----------|----------|
 | 1 | [Website & Signup](#1-website--signup) | `section:website`, `section:signup`, `section:website-extended` | ~16 | High |
 | 2 | [Onboarding](#2-onboarding) | `section:onboarding` | ~19 | Critical |
-| 3 | [Admin Dashboard & Configuration](#3-admin-dashboard--configuration) | `section:dashboard`, `section:integration-config`, `section:config-templates`, `section:authentication`, `section:email-notifications`, `section:dashboard-extended` | ~36 | High |
+| 3 | [Admin Dashboard & Configuration](#3-admin-dashboard--configuration) | `section:dashboard`, `section:integration-config`, `section:config-templates`, `section:authentication`, `section:email-notifications`, `section:dashboard-extended` | ~46 | High |
 | 4 | [Voice Agent Usage](#4-voice-agent-usage) | `section:call-setup` through `section:health` | ~93 | Critical |
 | 5 | [KB Configuration & Testing](#5-kb-configuration--testing) | `section:kb-creator`, `section:aurion-kb`, `section:kb-approval`, `section:kb-tags-import` | ~27 | High |
 | 6 | [Chat & Voice Widget](#6-chat--voice-widget) | `section:widget`, `section:widget-text` | ~12 | High |
@@ -281,6 +281,7 @@ What is being tested and why.
 | ITSM integration config | TC-022→027 | Provider credentials, connection test, sync settings, category mapping |
 | CS provider config | TC-028→030 | CS provider setup, credential validation, feature toggling |
 | Configuration templates | TC-031→035 | Template CRUD, template application, default values |
+| Industry template provisioning (#637) | TC-605→614 | Legal/telecom/manufacturing/hospitality/nonprofit templates, LLM seeding, business hours, AI automation, 18-key provisioning |
 | Auth & account | TC-036→037, TC-052 | Login, password reset, SSO, tenant switching |
 | Email notifications | TC-038→040 | Notification settings, email templates, alert preferences |
 | Dashboard extended | TC-540→544 | Activity log, search, breadcrumbs, keyboard shortcuts, dark mode |
@@ -760,6 +761,7 @@ Some TCs have corresponding automated tests in the main repo (`SMC-Consulting/vo
 | Admin API | E2E + unit | `apps/admin-api/tests/e2e/`, `apps/admin-api/tests/unit/` |
 | KB pipeline | E2E | `apps/admin-api/tests/e2e/test_kb_provider_e2e.py` |
 | Billing | E2E | `apps/admin-api/tests/e2e/billing/` |
+| Config templates (#637) | Unit (30) + E2E (52) | `apps/admin-api/tests/unit/test_config_template_expansion_637.py`, `apps/admin-api/tests/e2e/templates/` |
 | Dashboard | Playwright | `apps/admin-dashboard/e2e/` |
 | MCP sidecar | Provider tests | `apps/mcp-sidecar/tests/providers/` |
 
