@@ -221,7 +221,7 @@ What is being tested and why.
 | 16 | [Infrastructure & Provisioning](#16-infrastructure--provisioning) | `section:infra-policies`, `section:pricing-v2`, `section:46-status-page-management`, `section:tenant-provisioning` | ~12 | Low |
 | 17 | [Ops Console & Super-Admin](#17-ops-console--super-admin) | `section:super-admin`, `section:super-admin-ops`, `section:ops-console`, `section:fleet` | ~33 | High |
 | 18 | [End-User Auth & Flows](#18-end-user-auth--flows) | `section:end-user-auth` | 4 | High |
-| 19 | [Meeting Scheduler](#19-meeting-scheduler) | `section:meeting-scheduler` | 5 | Low |
+| 19 | [Meeting Scheduler](#19-meeting-scheduler) | `section:meeting-scheduler` | 16 | High |
 | 20 | [Text Agent](#20-text-agent) | `section:text-agent` | 4 | Medium |
 | 21 | [Email Pipeline](#21-email-pipeline) | `section:email-pipeline` | 6 | Medium |
 | 22 | [Mobile App](#22-mobile-app) | `section:mobile`, `section:mobile-extended`, `section:end-user-mobile` | ~21 | High |
@@ -552,15 +552,25 @@ See [Aurion CS Subsections](#section-9--aurion-cs-platform-subsections) below fo
 
 ### 19. Meeting Scheduler
 
-**What:** Calendar integration for scheduling meetings from within the platform.
+**What:** Booking link flow — agent sends a booking link email, contact picks a time, meeting + video conference + calendar event created automatically.
 
-**Where to test:** `/configuration/meetings`, profile calendar tab
+**Where to test:** Inbox conversation → "Schedule Meeting" button, booking page `/book/{token}`, profile calendar/video tabs
 
 **Labels:** `section:meeting-scheduler`
 
-| TCs | What to verify |
-|-----|----------------|
-| TC-525→529 | Calendar connection (Google/Microsoft), availability slots, meeting creation, notifications |
+| Subsection | TCs | What to verify |
+|------------|-----|----------------|
+| Calendar & availability | TC-525→527 | Calendar OAuth (Google/Microsoft), free/busy lookup |
+| Booking links (original) | TC-528→529 | Public booking page, end-user scheduling |
+| Send booking link — modal | TC-615→616 | Team link (default), personal link, modal UX (valid-for-days, message, no iCal) |
+| Booking flow + Zoom | TC-617, TC-620 | Team + Zoom, personal + Zoom — full E2E with video link in invite |
+| Booking flow + Teams | TC-618 | Team + MS Teams — video link in invite |
+| Booking flow + Google Meet | TC-619 | Team + Google Meet — video link in invite |
+| Booking flow — no video | TC-621 | Booking without video provider |
+| Booking link expiry | TC-622 | Valid-for-X-days enforcement |
+| Error handling | TC-623 | Rollback on email failure |
+| No duplicate events | TC-624 | Single calendar event, invite from agent email (not no-reply) |
+| Contact prepopulation | TC-625 | Name/email pre-filled on booking page via URL params |
 
 ---
 
