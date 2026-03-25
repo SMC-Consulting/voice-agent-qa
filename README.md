@@ -418,7 +418,7 @@ See [Aurion CS Subsections](#section-9--aurion-cs-platform-subsections) below fo
 
 | Subsection | TCs | What to verify |
 |------------|-----|----------------|
-| Subscription management | TC-348→356 | Plan selection, upgrade/downgrade, quota display, billing status banner |
+| Subscription management | TC-348→356 | Plan selection, upgrade/downgrade, quota display, billing status banner, **voice-side LLM cost tracking** (Issue #776 regression — verify token counts non-NULL) |
 | Invoicing | TC-357→362 | Invoice history, PDF download, payment method update |
 | Stripe webhooks | TC-363→371 | Payment success/failure, subscription renewal, past-due handling, grace period |
 
@@ -642,7 +642,7 @@ API_URL=https://apps-staging.aurionai.net npx expo start
 | 4k | Multilanguage | TC-105→113 | `section:multilang` | French, Dutch, German, Spanish, Italian support. Language switching mid-call. Cartesia TTS localization |
 | 4l | Recording | TC-114→117 | `section:recording` | Call recording toggle, S3 upload, retention policy, playback in conversation detail |
 | 4m | Error Handling | TC-118→122 | `section:errors` | LLM timeout fallback, MCP connection failure, ITSM API errors, graceful degradation |
-| 4n | Conversations | TC-123→125 | `section:conversations` | Conversation history saved, transcript accuracy, metadata (duration, tools used) |
+| 4n | Conversations | TC-123→125 | `section:conversations` | Conversation history saved, transcript accuracy, metadata (duration, tools used), **LLM token counts per exchange** (Issue #776 regression) |
 | 4o | Outbound Calls | TC-126→129 | `section:outbound-calls` | Scheduled callback, outbound call initiation, recipient pickup, conversation flow |
 | 4p | Health Checks | TC-130→133 | `section:health` | Agent health endpoint (`/`), MCP subprocess health, LLM connectivity, Redis/DB health |
 
