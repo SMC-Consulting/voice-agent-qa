@@ -2,7 +2,7 @@
 
 Manual QA tracking for the **Aurion** platform — an AI-powered voice agent for IT support + customer service SaaS.
 
-**~590 test cases** across 26 sections, organized by user journey.
+**~594 test cases** across 26 sections, organized by user journey.
 
 ---
 
@@ -219,7 +219,7 @@ What is being tested and why.
 | 14 | [Analytics & Monitoring](#14-analytics--monitoring) | `section:analytics` | 8 | Medium |
 | 15 | [Data Management & Admin Scripts](#15-data-management--admin-scripts) | `section:data-export`, `section:admin-scripts`, `section:admin-scripts-ext`, `section:config-backup` | ~18 | Low |
 | 16 | [Infrastructure & Provisioning](#16-infrastructure--provisioning) | `section:infra-policies`, `section:pricing-v2`, `section:46-status-page-management`, `section:tenant-provisioning` | ~12 | Low |
-| 17 | [Ops Console & Super-Admin](#17-ops-console--super-admin) | `section:super-admin`, `section:super-admin-ops`, `section:ops-console`, `section:fleet` | ~33 | High |
+| 17 | [Ops Console & Super-Admin](#17-ops-console--super-admin) | `section:super-admin`, `section:super-admin-ops`, `section:ops-console`, `section:fleet` | ~37 | High |
 | 18 | [End-User Auth & Flows](#18-end-user-auth--flows) | `section:end-user-auth` | 4 | High |
 | 19 | [Meeting Scheduler](#19-meeting-scheduler) | `section:meeting-scheduler` | 16 | High |
 | 20 | [Text Agent](#20-text-agent) | `section:text-agent` | 4 | Medium |
@@ -533,6 +533,7 @@ See [Aurion CS Subsections](#section-9--aurion-cs-platform-subsections) below fo
 | Ops operations | TC-493→497 | Platform health dashboard, system alerts, maintenance mode |
 | Ops console UI | TC-498→506 | Navigation, search, filtering, bulk actions, LLM cost tracking |
 | Fleet management | TC-507→511 | Fleet rollout (pause/resume/cancel/rollback), pod snapshots, HPA scaling |
+| Fleet propagation tenant targeting (#752) | TC-630→633 | Tenant multi-select, config key groups expansion, tenant ID validation, i18n |
 
 ---
 
