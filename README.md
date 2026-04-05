@@ -2,7 +2,7 @@
 
 Manual QA tracking for the **Aurion** platform — an AI-powered voice agent for IT support + customer service SaaS.
 
-**~594 test cases** across 26 sections, organized by user journey.
+**~608 test cases** across 26 sections, organized by user journey.
 
 ---
 
@@ -212,7 +212,7 @@ What is being tested and why.
 | 7 | [Twilio & Telephony](#7-twilio--telephony) | `section:twilio-webhooks`, `section:twilio-extended`, `section:telephony` | ~15 | High |
 | 8 | [Help Center](#8-help-center) | `section:help-center` | 20 | Medium |
 | 9 | [Aurion CS Platform](#9-aurion-cs-platform) | `section:cs-inbox` through `section:aurion-native` | ~144 | Critical |
-| 10 | [Billing & Invoicing](#10-billing--invoicing) | `section:billing`, `section:invoicing`, `section:stripe-webhooks` | ~24 | Critical |
+| 10 | [Billing & Invoicing](#10-billing--invoicing) | `section:billing`, `section:invoicing`, `section:stripe-webhooks` | ~38 | Critical |
 | 11 | [Public API & Developer Portal](#11-public-api--developer-portal) | `section:public-api`, `section:api-metering`, `section:developer-portal`, `section:devportal-extended` | ~21 | Medium |
 | 12 | [Security & Compliance](#12-security--compliance) | `section:security`, `section:rbac-security`, `section:consent-legal` | ~28 | Critical |
 | 13 | [Sync & CronJobs](#13-sync--cronjobs) | `section:sync`, `section:cronjobs` | ~20 | Medium |
@@ -410,17 +410,53 @@ See [Aurion CS Subsections](#section-9--aurion-cs-platform-subsections) below fo
 
 ### 10. Billing & Invoicing
 
-**What:** Stripe integration, subscription management, quota tracking, payment processing.
+**What:** Stripe integration, subscription management, quota tracking, payment processing, prepaid credits, addon management.
 
 **Where to test:** `/tenant/billing` (dashboard), Stripe test mode
 
 **Labels:** `section:billing`, `section:invoicing`, `section:stripe-webhooks`
+
+**Full test scenario matrix (161 paths):** [`docs/test-plans/billing-test-scenarios.md`](https://github.com/SMC-Consulting/voice_agent/blob/main/docs/test-plans/billing-test-scenarios.md) — see [#1065](https://github.com/SMC-Consulting/voice_agent/issues/1065)
 
 | Subsection | TCs | What to verify |
 |------------|-----|----------------|
 | Subscription management | TC-348→356 | Plan selection, upgrade/downgrade, quota display, billing status banner, **voice-side LLM cost tracking** (Issue #776 regression — verify token counts non-NULL) |
 | Invoicing | TC-357→362 | Invoice history, PDF download, payment method update |
 | Stripe webhooks | TC-363→371 | Payment success/failure, subscription renewal, past-due handling, grace period |
+| View plan & status | TC-780 | Current plan display, subscription status |
+| Upgrade via checkout | TC-781 | Stripe Checkout upgrade flow |
+| Invoice history | TC-782 | Invoice list, PDF download |
+| Payment method | TC-783 | Update card, remove card |
+| Monthly/annual toggle | TC-784 | Billing cycle switch |
+| Payment failure | TC-785 | Declined card handling |
+| Downgrade | TC-786 | Plan downgrade to lower tier |
+| Add-on management | TC-787 | Addon purchase, cancel, manage |
+| Overage & usage | TC-788 | Usage dashboard display |
+| Non-payment blocking | TC-789 | Account blocking & reactivation |
+| Prepaid credit purchase | TC-885 | Manual credit purchase via Stripe |
+| Prepaid consumption | TC-886 | Included first, then credits waterfall |
+| Credit exhaustion & block | TC-887 | Soft block when credits = 0 |
+| Auto top-up | TC-888 | Enable, threshold trigger, monthly cap |
+| Credit dashboard | TC-889 | Balance display, transaction history |
+| Credit alert emails | TC-890 | All 6 alert email types |
+| Credit idempotency | TC-891 | No double-crediting on retry |
+| Storage addon | TC-892 | Storage bundle purchase & auto-purchase |
+| Addon cancel & undo | TC-893 | Deferred cancel, undo cancel |
+| Usage vs plan card | TC-894 | Storage, voice, prepaid display |
+| **Cross-product upgrades** | **TC-895** | **Voice→bundle, helpdesk→bundle (10 combos)** |
+| **Blocked transitions** | **TC-896** | **Rejected invalid plan changes (8 combos)** |
+| **Upgrade + cycle switch** | **TC-897** | **Combined plan + cycle change** |
+| **Pending downgrades** | **TC-898** | **Schedule, cancel pending, override with upgrade** |
+| **Credit expiry** | **TC-899** | **Expired credits unusable, partial expiry** |
+| **Credits + plan transitions** | **TC-900** | **Carry, freeze on free, restore on reactivate** |
+| **Allowance check gate** | **TC-901** | **Agent-side call blocking matrix (7 combos)** |
+| **Dormant metered addons** | **TC-902** | **Hidden, non-purchasable, no charges** |
+| **Webhook reconciliation** | **TC-903** | **6 Stripe webhook event types** |
+| **Downgrade impact preview** | **TC-904** | **Feature/allowance loss preview** |
+| **Full billing journey** | **TC-905** | **Free→Starter→Bundle→Annual→Pro end-to-end** |
+| **Addon quantity updates** | **TC-906** | **Increase/decrease seat & storage quantity** |
+| **Idempotency & races** | **TC-907** | **Double-click, concurrent, Stripe-DB divergence** |
+| **Plan×cycle matrix** | **TC-908** | **All 14 plan×cycle new subscription combos** |
 
 ---
 
